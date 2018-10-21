@@ -36,8 +36,9 @@ usage: main.py [-h] [--train]
 Banana Navigation Agent
 
 optional arguments:
-  -h, --help  show this help message and exit
-  --train     Train the DQN agent if used, else load the trained weights and
-              play the game
+  -h, --help      show this help message and exit
+  --train         Train the DQN agent if used, else load the trained weights
+                  and play the game
+  --weights PATH  path of .pth file with the trained weights
 ```
 For further details run `Navigation.ipynb`.
