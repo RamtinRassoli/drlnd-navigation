@@ -1,7 +1,7 @@
 # Unity Banana Navigation
 
 This is an implementaiton of Udacity Deep Reinforcement Learning Nanodegree's first project. In this project, the agent's goal is to navigate through blue bananas in a square world to collect the yellow ones. 
-__
+
 ![](images/trained_gif.gif)
 
 ## Environment Details
