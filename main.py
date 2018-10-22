@@ -39,6 +39,7 @@ def dqn(env, brain_name, agent, config, train_mode=True, weights_path=None):
     scores = []  # list containing scores from each episode
     scores_window = deque(maxlen=100)  # last 100 scores
     eps = config['train']['eps_start']  # initialize epsilon
+    score_threshold = 13.0
 
     if weights_path:
         weights = torch.load(weights_path)
@@ -66,32 +67,20 @@ def dqn(env, brain_name, agent, config, train_mode=True, weights_path=None):
         scores_window.append(score)  # save most recent score
         scores.append(score)  # save most recent score
         eps = max(config['train']['eps_end'], config['train']['eps_decay'] * eps)  # decrease epsilon
-        print('Episode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_window)))
+        # print('Episode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_window)))
         if train_mode:
-            log_episode(i_episode, agent, scores_window)
+            if i_episode % 100 == 0:
+                print('Episode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_window)))
+            if np.mean(scores_window) >= score_threshold:
+                print('Environment solved in {:d} episodes!\tAverage Score: {:.2f}'.format(i_episode - 100,
+                                                                                           np.mean(scores_window)))
+                torch.save(agent.qnetwork_local.state_dict(), 'checkpoint_{}.pth'.format(i_episode))
+                score_threshold += 1
             if i_episode % 500 == 0:
                 plot_scores(scores)
 
     plot_scores(scores)
     return scores
-
-
-def log_episode(i_episode, agent, scores_window):
-    """Logs the score after each episode and save the network after every 100 episodes.
-
-    Params
-    ======
-        i_episode (int): episode number
-        agent: the dqn agent
-        scores_window: a deque that stores the last 100 scores
-    """
-    # print('Episode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_window)))
-    if i_episode % 100 == 0:
-        print('Episode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_window)))
-    if np.mean(scores_window) >= 14.0:
-        print('Environment solved in {:d} episodes!\tAverage Score: {:.2f}'.format(i_episode - 100,
-                                                                                     np.mean(scores_window)))
-        torch.save(agent.qnetwork_local.state_dict(), 'checkpoint_{}.pth'.format(i_episode))
 
 
 def plot_scores(scores):
@@ -121,9 +110,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Banana Navigation Agent')
     parser.add_argument('--train', action="store_true", default=False,
                         help='Train the DQN agent if used, else load the trained weights and play the game')
-    parser.add_argument('--weights-path', action="store", dest="weights_path", type=str,
+    parser.add_argument('--weights', action="store", dest="path", type=str,
                         help='path of .pth file with the trained weights')
     args = parser.parse_args()
     print("Train_mode: {}".format(args.train))
 
-    main("model/config.yaml", train_mode=args.train, weights_path=args.weights_path)
+    main("model/config.yaml", train_mode=args.train, weights_path=args.path)
