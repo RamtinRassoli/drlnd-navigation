@@ -1,7 +1,10 @@
 # Unity Banana Navigation
-This is an implementaiton of Udacity Deep Reinforcement Learning Nanodegree's first project. In this project, the agent's goal is to navigate through blue bananas in a square world to collect the yellow ones.
 
-## environment details
+This is an implementaiton of Udacity Deep Reinforcement Learning Nanodegree's first project. In this project, the agent's goal is to navigate through blue bananas in a square world to collect the yellow ones. 
+
+![](images/trained_gif.gif)
+
+## Environment Details
 
 | Space        | Type           | Description  |
 | ------------- |:-------------:| :-----|
@@ -25,7 +28,7 @@ foo@bar:~$ pip install . -e
 ```
 
 ## Run the Agent
-`main.py` is the cli to train/watch the agent. 
+`main.py` is the cli to train/watch the agent. You can find the hyperparameters in `model/config.yaml`.
 ```bash
 foo@bar:~$ python main.py -h
 usage: main.py [-h] [--train]
@@ -33,8 +36,9 @@ usage: main.py [-h] [--train]
 Banana Navigation Agent
 
 optional arguments:
-  -h, --help  show this help message and exit
-  --train     Train the DQN agent if used, else load the trained weights and
-              play the game
+  -h, --help      show this help message and exit
+  --train         Train the DQN agent if used, else load the trained weights
+                  and play the game
+  --weights PATH  path of .pth file with the trained weights
 ```
 For further details run `Navigation.ipynb`.
