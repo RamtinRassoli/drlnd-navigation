@@ -28,7 +28,7 @@ foo@bar:~$ pip install . -e
 ```
 
 ## Run the Agent
-`main.py` is the cli to train/watch the agent. 
+`main.py` is the cli to train/watch the agent. You can find the hyperparameters in `model/config.yaml`.
 ```bash
 foo@bar:~$ python main.py -h
 usage: main.py [-h] [--train]
