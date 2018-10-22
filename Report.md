@@ -1,5 +1,39 @@
 # Report
 
+## Learning Algorithm
+The reinforcement learning algorithm implemented in the project is [Double DQ-learning](https://arxiv.org/pdf/1509.06461.pdf).
+
+### Action Value Network Architecture
+
+| Layer Name      | Layer Type,| Input Dimension          | Ouput  |
+| -------------|:-------:|:-------------:| -----:|
+| input      | Linear with Relu|(37,) | (128,) |
+| dropout      | Dropout |(128,) | (128,) |
+| hidden      | Linear with Relu|(128,) | (64,) |
+| output | Linear |(64,) | (4,) |
+
+
+
+### Hyperparameters
+```yaml
+exp_replay:
+    buffer: 5000 # replay buffer size
+    batch: 64 # minibatch size
+    update_every: 4 # how often to update the network
+dq:
+    gamma: 0.99 # discount factor
+    tau: 1e-3 # for soft update of target parameters
+    lr: 5e-4 # learning rate
+train:
+    n_episodes: 2500
+    max_t: 1000
+    eps_start: 1.0
+    eps_end: 1e-2
+    eps_decay: 0.999
+```
+
+## Results
+![](images/2000.png)
 ```
 Episode 100	Average Score: 0.22
 Episode 200	Average Score: 1.08
@@ -20,6 +54,5 @@ Episode 1600	Average Score: 12.72
 Episode 1700	Average Score: 12.72
 Environment solved in 1623 episodes!	Average Score: 13.06
 ```
-The learning algorithm used is Double Deep Q Learning as described in original paper
+## Ideas for Future Work
 
-he goal of the agent is to gather yellow bananas while avoiding the blue ones. Here are Unity details of the environment:
