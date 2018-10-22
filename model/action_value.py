@@ -6,7 +6,7 @@ import torch.nn.functional as F
 class QNetwork(nn.Module):
     """Actor (Policy) Model."""
 
-    def __init__(self, state_size, action_size, seed, fc1_units=64, fc2_units=32):
+    def __init__(self, state_size, action_size, seed, fc1_units=128, fc2_units=64):
         """Initialize parameters and build model.
         Params
         ======
@@ -23,5 +23,6 @@ class QNetwork(nn.Module):
     def forward(self, state):
         """Build a network that maps state -> action values."""
         x = F.relu(self.input(state))
+        x = F.dropout(x)
         x = F.relu(self.hidden(x))
         return self.output(x)
