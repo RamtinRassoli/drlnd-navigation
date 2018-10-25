@@ -1,16 +1,19 @@
 # Report
 
 ## Learning Algorithm
-The reinforcement learning algorithm implemented in the project is [Double DQ-learning](https://arxiv.org/pdf/1509.06461.pdf).
+The reinforcement learning algorithm implemented in the project is [Double DQ-learning](https://arxiv.org/pdf/1509.06461.pdf). 
+Double DQ-learning aimes at decoupling the process of choosing the best actions from the estimation of action-values. This would address the issue of overestimation of the action-values which exists in [Vanilla Deep Q-Learning](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf).
+In this implementation, the input is a state vector and not the raw pixels. Hence, the CNN layers in the action-value network are replaced with ANN.
+
 
 ### Action Value Network Architecture
 
-| Layer Name      | Layer Type,| Input Dimension          | Ouput  |
+| Layer Name      | Layer Type,| Input Dimension          | Ouput Dimension |
 | -------------|:-------:|:-------------:| -----:|
-| input      | Linear with Relu|(37,) | (128,) |
-| dropout      | Dropout |(128,) | (128,) |
-| hidden      | Linear with Relu|(128,) | (64,) |
-| output | Linear |(64,) | (4,) |
+| input      | Linear with Relu|(37,) | (32,) |
+| dropout      | Dropout |(32,) | (32,) |
+| hidden      | Linear with Relu|(32,) | (16,) |
+| output | Linear |(16,) | (4,) |
 
 
 
@@ -35,6 +38,7 @@ train:
 ## Results
 ![](images/2000.png)
 ```
+Episode 100     Average Score: 0.42
 Episode 200     Average Score: 2.34
 Episode 300     Average Score: 5.01
 Episode 400     Average Score: 6.67
@@ -46,5 +50,14 @@ Episode 900     Average Score: 11.13
 Episode 1000    Average Score: 12.67
 Environment solved in 935 episodes!     Average Score: 13.05
 ```
-## Ideas for Future Work
+## Ideas for Improvements
 
+- Hyperparameter Tuning
+- [Rainbow](https://arxiv.org/pdf/1710.02298.pdf)
+    - Double DQN (DDQN)
+    - [Prioritized experience replay](https://arxiv.org/abs/1511.05952)
+    - [Dueling DQN](https://arxiv.org/abs/1511.06581)
+    - [Learning from multi-step bootstrap targets](https://arxiv.org/abs/1602.01783)
+    - [Noisy DQN](https://arxiv.org/abs/1706.10295)
+    - [Distributional DQN](https://arxiv.org/abs/1707.06887)
+    
