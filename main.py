@@ -101,6 +101,7 @@ def main(config_path, train_mode=True, weights_path=None):
     agent = Agent(state_size=state_size, action_size=action_size, config=config, seed=0)
 
     scores = dqn(env, brain_name, agent, config, train_mode, weights_path)
+    env.close()
 
     return scores
 
