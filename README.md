@@ -5,12 +5,14 @@ This is an implementaiton of Udacity Deep Reinforcement Learning Nanodegree's fi
 ![](images/trained_gif.gif)
 
 ## Environment Details
+This is an episodic RL problem and the task is considered `solved` when the agent gets an _average score_ of at least 13 over 100 consecutive episodes.
 
-| Space        | Type           | Description  |
-| ------------- |:-------------:| :-----|
-| Observation      | Continuous | Contains the agent's velocity, along with ray-based perception<br> of objects around agent's forward direction |
-| Action      | Discrete      |  0. Forward<br>  1. Backward<br> 2. Left<br> 3. Right  |
-| Reward      | Discrete      |  Yellow Banana -> +1 <br> Blue Banana -> -1 |
+| Space        | Type | Dim          | Description  |
+| ------------- |:------:|:-------:| :-----|
+| Observation      | Continuous | [37,] | Contains the agent's velocity, along with ray-based perception<br> of objects around agent's forward direction |
+| Action      | Discrete | [4,]     |  0. Forward<br>  1. Backward<br> 2. Left<br> 3. Right  |
+| Reward      | Discrete | [1,]     |  Yellow Banana -> +1 <br> Blue Banana -> -1 |
+
 
 ## Getting Started
 Make sure the environment and the Python interface have compatible versions (Python 3.6). 
